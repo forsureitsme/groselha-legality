@@ -27,23 +27,17 @@
 		if (card.legalities.commander !== 'legal') {
 			return {
 				isLegal: false,
-				reason: 'Não é válido no Commander.'
+				reason: 'Não é válida no Commander.'
 			};
 		}
 
 		const response = await fetch(`/api/ligamagic/${card.name}.json`);
-		const { isLegal, moreInfoLink } = await response.json();
+		const { isLegal, reason, moreInfoLink } = await response.json();
 
 		if (!isLegal) {
-			const date = new Date();
-			const endMonth = `${(date.getMonth() + 1 + '').padStart(2, '0')}/${date.getFullYear()}`;
-
-			date.setMonth(date.getMonth() - 1);
-			const startMonth = `${(date.getMonth() + 1 + '').padStart(2, '0')}/${date.getFullYear()}`;
-
 			return {
 				isLegal,
-				reason: `Não esteve por menos de R$10 na LigaMagic no período da rotação (meses ${startMonth} até ${endMonth}).`,
+				reason,
 				moreInfo: moreInfoLink
 			};
 		}
