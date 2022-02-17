@@ -11,7 +11,7 @@ https://groselha-legality.vercel.app
 
 ```
 yarn
-yarn dev
+vercel dev
 ```
 
 ## [Alterações](https://github.com/forsureitsme/groselha-legality/blob/main/CHANGELOG.md)
