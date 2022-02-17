@@ -1,5 +1,6 @@
-import * as cheerio from 'cheerio';
-import acorn, { Parser } from 'acorn';
+import cheerio from 'cheerio';
+import { Parser } from 'acorn';
+import axios from 'axios';
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
@@ -13,15 +14,13 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 		});
 
 		if (isInBanlist) {
-			return {
-				body: {
-					isLegal: !isInBanlist,
-					moreInfoLink: banlistUrl,
-					...(isInBanlist && {
-						reason: `Está na banlist do formato Groselha.`
-					})
-				}
-			};
+			return response.status(200).json({
+				isLegal: !isInBanlist,
+				moreInfoLink: banlistUrl,
+				...(isInBanlist && {
+					reason: `Está na banlist do formato Groselha.`
+				})
+			});
 		}
 
 		// Check price legality
@@ -45,7 +44,10 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 			})
 		});
 	} catch (error) {
-		return response.status(500).send(error);
+		logError(error, false);
+		return response.status(500).json({
+			error
+		});
 	}
 };
 
@@ -53,17 +55,19 @@ async function checkBanlistLegality({ card }) {
 	const deckId = 3179093;
 	const banlistUrl = `https://www.ligamagic.com/?view=dks/deck&id=${deckId}&lang=2`;
 
-	const ligaMagic: string = await fetch(banlistUrl)
-		.then((response) => response.text())
-		.catch(function (error) {
-			throw error;
-		});
+	console.log('REQUEST BANLIST TALISMAN');
+	const ligaMagic: string = await axios({
+		url: banlistUrl,
+		responseType: 'text'
+	})
+		.then((response) => response.data)
+		.catch(logError);
 
 	const $ = cheerio.load(ligaMagic);
 
 	const banlist = [
 		...new Set(
-			$('#deck-view .deck-card a').map((i, deckCard: cheerio.TagElement) =>
+			$('#deck-view .deck-card a').map((_, deckCard: any) =>
 				decodeURIComponent(
 					deckCard.attribs.href.substring('./?view=cards/card&card='.length)
 				).replace(/\+/g, ' ')
@@ -120,23 +124,26 @@ async function checkPriceLegality({ card, startMonth, endMonth }) {
 	 * }
 	 */
 	const requestUrl = `https://www.ligamagic.com.br/?view=cards/card&show=2&campo=1&card=${card}&mesHistoricoInicio=${startMonth}&mesHistoricoFim=${endMonth}`;
-	const ligaMagic: string = await fetch(requestUrl)
-		.then((response) => response.text())
-		.catch(function (error) {
-			throw error;
-		});
+
+	console.log('REQUEST PREÇO LIGA MAGIC');
+	const ligaMagic: string = await axios({
+		url: requestUrl,
+		responseType: 'text'
+	})
+		.then((response) => response.data)
+		.catch(logError);
 
 	const $ = cheerio.load(ligaMagic);
 
-	const $script: cheerio.TagElement = $('script')
+	const $script: any = $('script')
 		.toArray()
-		.find((node: cheerio.TagElement) => {
+		.find((node: any) => {
 			return node.children.find((childNode: cheerio.Element) =>
 				childNode.data.includes('Highcharts.chart')
 			);
 		});
 
-	const code: acorn.Node = Parser.parse(
+	const code: any = Parser.parse(
 		$script.children.find((childNode: cheerio.Element) =>
 			childNode.data.includes('Highcharts.chart')
 		).data,
@@ -156,4 +163,14 @@ async function checkPriceLegality({ card, startMonth, endMonth }) {
 		wasUnderTenBrazillianReaisInRotation,
 		priceLegalityInfo: requestUrl
 	};
+}
+
+function logError(error: Error, shouldThrow: Boolean = true) {
+	console.error(error);
+
+	if (shouldThrow) {
+		throw error;
+	}
+
+	return null;
 }

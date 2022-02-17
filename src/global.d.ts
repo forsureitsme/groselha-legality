@@ -5,4 +5,11 @@ interface MagicSet {
 	data: [number];
 }
 
+interface Card {
+	name: string;
+	legalities: {
+		commander: string;
+	};
+}
+
 declare module 'simple-svelte-autocomplete';
