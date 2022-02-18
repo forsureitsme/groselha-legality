@@ -1,4 +1,9 @@
+<script>
+	import Auth from './Auth.svelte';
+</script>
+
 <header>
+	<Auth />
 	<h1>Legalidade do formato Groselha</h1>
 	<p>
 		<a
