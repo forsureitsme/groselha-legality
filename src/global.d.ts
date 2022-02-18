@@ -13,3 +13,4 @@ interface Card {
 }
 
 declare module 'simple-svelte-autocomplete';
+declare module 'markdown';

@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
+import { getValueFromAcornNode, logError } from '../src/utils';
+
 export default async (request: VercelRequest, response: VercelResponse) => {
 	try {
 		const { card } = request.query;
@@ -67,7 +69,7 @@ async function checkBanlistLegality({ card }) {
 
 	const banlist = [
 		...new Set(
-			$('#deck-view .deck-card a').map((_, deckCard: any) =>
+			$('#deck-view .deck-card a').map(({}, deckCard: any) =>
 				decodeURIComponent(
 					deckCard.attribs.href.substring('./?view=cards/card&card='.length)
 				).replace(/\+/g, ' ')
@@ -81,47 +83,11 @@ async function checkBanlistLegality({ card }) {
 	};
 }
 
-/**
- * Receives an Acorn node and returns the parsed value from the expression.
- * @param node Acorn node
- * @returns Parsed expression
- */
-function getValue(node: any) {
-	if (node.type === 'ObjectExpression') {
-		return node.properties.reduce(
-			(obj: object, property: unknown) => ({ ...obj, ...getValue(property) }),
-			{}
-		);
-	}
-
-	if (node.type === 'ArrayExpression') {
-		return [...node.elements.map((property: unknown) => getValue(property))];
-	}
-
-	if (node.type === 'Property') {
-		return {
-			[getValue(node.key)]: getValue(node.value)
-		};
-	}
-
-	if (node.type === 'Identifier') {
-		return node.name;
-	}
-
-	if (node.type === 'Literal') {
-		return node.value;
-	}
-
-	return node.value;
-}
-
 async function checkPriceLegality({ card, startMonth, endMonth }) {
 	/**
 	 * Request params:
-	 * {
-	 * 	show=2 // Historic prices tab
-	 * 	campo=1 // Show data using "least price" field
-	 * }
+	 * 	 show=2 // Historic prices tab
+	 * 	 campo=1 // Show data using "least price" field
 	 */
 	const requestUrl = `https://www.ligamagic.com.br/?view=cards/card&show=2&campo=1&card=${card}&mesHistoricoInicio=${startMonth}&mesHistoricoFim=${endMonth}`;
 
@@ -153,7 +119,7 @@ async function checkPriceLegality({ card, startMonth, endMonth }) {
 	);
 
 	const chartParams = code.body[0].expression.arguments[1];
-	const setPrices: [MagicSet] = getValue(chartParams).series;
+	const setPrices: [MagicSet] = getValueFromAcornNode(chartParams).series;
 
 	const wasUnderTenBrazillianReaisInRotation = setPrices.some((set: MagicSet) =>
 		set.data.some((price: number) => price <= 10)
@@ -163,14 +129,4 @@ async function checkPriceLegality({ card, startMonth, endMonth }) {
 		wasUnderTenBrazillianReaisInRotation,
 		priceLegalityInfo: requestUrl
 	};
-}
-
-function logError(error: Error, shouldThrow: Boolean = true) {
-	console.error(error);
-
-	if (shouldThrow) {
-		throw error;
-	}
-
-	return null;
 }

@@ -10,7 +10,7 @@ https://groselha-legality.vercel.app
 ## Desenvolvimento
 
 ```
-yarn
+npx yarn
 vercel dev
 ```
 
