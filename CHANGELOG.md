@@ -12,7 +12,7 @@ Todas alterações relevantes para os usuários serão salvas neste arquivo.
 - Identificar corretamente legalidade onde o preço da carta foil é mais barato do que o preço da carta normal.
 - Log de erros.
 
-## [0.3.0]
+## [0.1.0]
 
 ### Adicionado
 
