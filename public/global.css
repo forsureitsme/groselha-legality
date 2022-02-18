@@ -1,7 +1,9 @@
-@import '@fontsource/press-start-2p';
-
 :root {
 	font-family: 'Press Start 2P', sans-serif;
 	background-color: black;
 	color: whitesmoke;
+}
+
+body {
+	margin: 0;
 }
