@@ -7,10 +7,16 @@ Todas alterações relevantes para os usuários serão salvas neste arquivo.
 
 - Permitir alteração da banlist sem que seja necessário alterar o código fonte.
 - Requisições feitas à banlist da Talisman serão salvas no cache, já que é necessário alterar no código sempre que há alguma alteração.
-- Verificação de legalidade de cartas de dois lados (ie. `Glasspool Mimic // Glasspool Shore`)
+
 - Alterar estilo da página completamente.
 - Identificar corretamente legalidade onde o preço da carta foil é mais barato do que o preço da carta normal.
 - Log de erros.
+
+## [0.1.1]
+
+### Corrigido
+
+- Verificação de legalidade de cartas de dois lados (ie. `Glasspool Mimic // Glasspool Shore`)
 
 ## [0.1.0]
 
