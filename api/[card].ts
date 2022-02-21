@@ -57,7 +57,6 @@ async function checkBanlistLegality({ card }) {
 	const deckId = 3179093;
 	const banlistUrl = `https://www.ligamagic.com/?view=dks/deck&id=${deckId}&lang=2`;
 
-	console.log('REQUEST BANLIST TALISMAN');
 	const ligaMagic: string = await axios({
 		url: banlistUrl,
 		responseType: 'text'
@@ -91,7 +90,6 @@ async function checkPriceLegality({ card, startMonth, endMonth }) {
 	 */
 	const requestUrl = `https://www.ligamagic.com.br/?view=cards/card&show=2&campo=1&card=${card}&mesHistoricoInicio=${startMonth}&mesHistoricoFim=${endMonth}`;
 
-	console.log('REQUEST PREÇO LIGA MAGIC');
 	const ligaMagic: string = await axios({
 		url: requestUrl,
 		responseType: 'text'
