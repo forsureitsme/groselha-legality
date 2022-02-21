@@ -10,6 +10,7 @@ interface Card {
 	legalities: {
 		commander: string;
 	};
+	card_faces?: object;
 }
 
 declare module 'simple-svelte-autocomplete';

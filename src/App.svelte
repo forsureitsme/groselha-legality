@@ -2,6 +2,7 @@
 	import AutoComplete from 'simple-svelte-autocomplete';
 	import Footer from './components/Footer.svelte';
 	import Header from './components/Header.svelte';
+	import { assertFecth } from './utils';
 
 	let card: Card;
 
@@ -9,6 +10,8 @@
 		const url = 'https://api.scryfall.com/cards/search?q=' + encodeURIComponent(q);
 
 		const response = await fetch(url);
+		assertFecth(response);
+
 		const json = await response.json();
 
 		return json.data;
@@ -22,7 +25,14 @@
 			};
 		}
 
-		const response = await fetch(`/api/${card.name}`);
+		let { name } = card;
+		if (card.card_faces) {
+			name = card.card_faces[0].name;
+		}
+
+		const response = await fetch(`/api/${name}`);
+		assertFecth(response);
+
 		const { isLegal, reason, moreInfoLink } = await response.json();
 
 		if (!isLegal) {
@@ -54,7 +64,6 @@
 			noResultsText="Sem resultados"
 			hideArrow
 			showClear
-			showLoadingIndicator
 		/>
 
 		{#if card}

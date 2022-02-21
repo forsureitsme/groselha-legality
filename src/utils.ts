@@ -41,3 +41,9 @@ export function getValueFromAcornNode(node: any) {
 
 	return node.value;
 }
+
+export async function assertFecth(r: Response) {
+	if (!r.ok) {
+		logError(new Error(r.statusText));
+	}
+}
