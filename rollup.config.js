@@ -6,6 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
+import pkg from './package.json';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -36,7 +37,12 @@ export default {
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
-		file: 'public/build/bundle.js'
+		file: 'public/build/bundle.js',
+		intro: `
+			globalThis.ENVIRONMENT = '${process.env.VERCEL_ENV}';
+			globalThis.PKG_NAME = '${pkg.name}';
+			globalThis.PKG_VERSION = '${pkg.version}';
+		`
 	},
 	plugins: [
 		svelte({

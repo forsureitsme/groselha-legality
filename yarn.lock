@@ -163,6 +163,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sentry/browser@npm:^6.17.9":
+  version: 6.17.9
+  resolution: "@sentry/browser@npm:6.17.9"
+  dependencies:
+    "@sentry/core": 6.17.9
+    "@sentry/types": 6.17.9
+    "@sentry/utils": 6.17.9
+    tslib: ^1.9.3
+  checksum: 6beb1e99e11ea0c846db4d9644dc40fb47d83aabf0f65e6fce3a0c69bc7b1fe0e9313c8e70923581a7a30e540aa59c07cb39b287628953bc80f5022d55bd5145
+  languageName: node
+  linkType: hard
+
 "@sentry/core@npm:6.17.9":
   version: 6.17.9
   resolution: "@sentry/core@npm:6.17.9"
@@ -1003,6 +1015,7 @@ __metadata:
     "@rollup/plugin-commonjs": ^17.0.0
     "@rollup/plugin-node-resolve": ^11.0.0
     "@rollup/plugin-typescript": ^8.0.0
+    "@sentry/browser": ^6.17.9
     "@sentry/node": ^6.17.9
     "@sentry/tracing": ^6.17.9
     "@tsconfig/svelte": ^2.0.0

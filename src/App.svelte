@@ -1,10 +1,9 @@
-<script lang="ts">
+<script lang="ts" context="module">
 	import AutoComplete from 'simple-svelte-autocomplete';
 	import Footer from './components/Footer.svelte';
 	import Header from './components/Header.svelte';
 	import { assertFecth } from './helpers';
 
-	let card: Card;
 	async function scryfallSearch(q: string) {
 		const url = 'https://api.scryfall.com/cards/search?q=' + encodeURIComponent(q);
 
@@ -46,6 +45,10 @@
 			isLegal
 		};
 	}
+</script>
+
+<script lang="ts">
+	let card: Card;
 </script>
 
 <div class="App">
