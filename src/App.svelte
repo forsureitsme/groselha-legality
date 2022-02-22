@@ -2,10 +2,9 @@
 	import AutoComplete from 'simple-svelte-autocomplete';
 	import Footer from './components/Footer.svelte';
 	import Header from './components/Header.svelte';
-	import { assertFecth } from './utils';
+	import { assertFecth } from './helpers';
 
 	let card: Card;
-
 	async function scryfallSearch(q: string) {
 		const url = 'https://api.scryfall.com/cards/search?q=' + encodeURIComponent(q);
 
