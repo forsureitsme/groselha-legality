@@ -17,7 +17,7 @@ declare var ENVIRONMENT: Environment;
 
 enum Environment {
 	dev = 'development',
-	test = 'testing',
+	prev = 'preview',
 	prod = 'production'
 }
 
