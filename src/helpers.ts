@@ -1,5 +1,5 @@
 export function logError(error: Error, shouldThrow: Boolean = true) {
-	if (globalThis.ENVIRONMENT !== Environment[Environment.prod]) {
+	if (globalThis.ENVIRONMENT !== 'production') {
 		console.error(error);
 	}
 
