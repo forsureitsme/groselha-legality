@@ -4,9 +4,15 @@ import axios from 'axios';
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-import { getValueFromAcornNode, logError } from '../src/utils';
+import Sentry from './_sentry';
+import { getValueFromAcornNode } from './_helpers';
 
 export default async (request: VercelRequest, response: VercelResponse) => {
+	const cardLegalityTransaction = Sentry.startTransaction({
+		op: '[card]',
+		name: 'Check card legality'
+	});
+
 	try {
 		const { card } = request.query;
 
@@ -46,10 +52,13 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 			})
 		});
 	} catch (error) {
-		logError(error, false);
+		Sentry.captureException(error);
+
 		return response.status(500).json({
 			error
 		});
+	} finally {
+		cardLegalityTransaction.finish();
 	}
 };
 
@@ -62,7 +71,9 @@ async function checkBanlistLegality({ card }) {
 		responseType: 'text'
 	})
 		.then((response) => response.data)
-		.catch(logError);
+		.catch((error) => {
+			throw error;
+		});
 
 	const $ = cheerio.load(ligaMagic);
 
@@ -95,7 +106,9 @@ async function checkPriceLegality({ card, startMonth, endMonth }) {
 		responseType: 'text'
 	})
 		.then((response) => response.data)
-		.catch(logError);
+		.catch((error) => {
+			throw error;
+		});
 
 	const $ = cheerio.load(ligaMagic);
 

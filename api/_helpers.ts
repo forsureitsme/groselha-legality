@@ -1,13 +1,3 @@
-export function logError(error: Error, shouldThrow: Boolean = true) {
-	console.error(error);
-
-	if (shouldThrow) {
-		throw error;
-	}
-
-	return null;
-}
-
 /**
  * Receives an Acorn node and returns the parsed value from the expression.
  * @param node Acorn node
@@ -40,10 +30,4 @@ export function getValueFromAcornNode(node: any) {
 	}
 
 	return node.value;
-}
-
-export async function assertFecth(r: Response) {
-	if (!r.ok) {
-		logError(new Error(r.statusText));
-	}
 }

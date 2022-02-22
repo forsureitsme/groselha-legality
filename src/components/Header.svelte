@@ -1,3 +1,5 @@
+<svelte:options immutable={true} />
+
 <header>
 	<h1>Legalidade do formato Groselha</h1>
 	<p>

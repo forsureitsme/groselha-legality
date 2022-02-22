@@ -7,10 +7,14 @@ Todas alterações relevantes para os usuários serão salvas neste arquivo.
 
 - Permitir alteração da banlist sem que seja necessário alterar o código fonte.
 - Requisições feitas à banlist da Talisman serão salvas no cache, já que é necessário alterar no código sempre que há alguma alteração.
-
 - Alterar estilo da página completamente.
 - Identificar corretamente legalidade onde o preço da carta foil é mais barato do que o preço da carta normal.
-- Log de erros.
+
+## [0.2.0]
+
+### Adicionado
+
+- Erros na API e no site serão registrados no [Sentry](https://sentry.io).
 
 ## [0.1.1]
 

@@ -13,5 +13,13 @@ interface Card {
 	card_faces?: object;
 }
 
+declare var ENVIRONMENT: Environment;
+
+enum Environment {
+	dev = 'development',
+	prev = 'preview',
+	prod = 'production'
+}
+
 declare module 'simple-svelte-autocomplete';
 declare module 'markdown';
