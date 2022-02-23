@@ -1,14 +1,19 @@
 # Changelog
 
-Todas alterações relevantes para os usuários serão salvas neste arquivo.
-[Formato das alterações](https://keepachangelog.com/en/1.0.0/)
+Todas alterações relevantes para os usuários serão salvas neste arquivo, seguindo [este formato](https://keepachangelog.com/en/1.0.0/).
+
+<!--
 
 ## Para fazer
 
+- Idenfiticar cards banidos através das palavras-chave definidas nas regras do formato. (ex.: `extra turn`, `win the game`, `lose the game`)
+- Adicionar lembrete sobre os 16 de dano necessário para derrotar um jogador através de Infect.
 - Permitir alteração da banlist sem que seja necessário alterar o código fonte.
 - Requisições feitas à banlist da Talisman serão salvas no cache, já que é necessário alterar no código sempre que há alguma alteração.
 - Alterar estilo da página completamente.
 - Identificar corretamente legalidade onde o preço da carta foil é mais barato do que o preço da carta normal.
+
+-->
 
 ## [0.2.0]
 
