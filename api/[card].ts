@@ -63,7 +63,7 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 };
 
 async function checkBanlistLegality({ card }) {
-	const deckId = 3179093;
+	const deckId = 3264276;
 	const banlistUrl = `https://www.ligamagic.com/?view=dks/deck&id=${deckId}&lang=2`;
 
 	const ligaMagic: string = await axios({
