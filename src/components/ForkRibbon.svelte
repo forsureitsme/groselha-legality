@@ -17,24 +17,8 @@
 	}
 	.forkongithub a:hover {
 		background: #fea0ed;
-		/* color: #fff; */
 	}
-	/* .forkongithub a::before,
-	.forkongithub a::after {
-		content: '';
-		width: 100%;
-		display: block;
-		position: absolute;
-		top: 1px;
-		left: 0;
-		height: 1px;
-		background: #fff;
-	}
-	.forkongithub a::after {
-		bottom: 1px;
-		top: auto;
-	} */
-	@media screen and (min-width: 800px) {
+	@media screen and (min-width: 1250px) {
 		.forkongithub {
 			position: absolute;
 			display: block;
@@ -51,10 +35,6 @@
 			top: 60px;
 			right: -60px;
 			transform: rotate(45deg);
-			-webkit-transform: rotate(45deg);
-			-ms-transform: rotate(45deg);
-			-moz-transform: rotate(45deg);
-			-o-transform: rotate(45deg);
 			box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
 		}
 	}
