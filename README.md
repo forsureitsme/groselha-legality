@@ -11,6 +11,7 @@ https://groselha-legality.vercel.app
 
 ```
 npx yarn
+vercel pull
 vercel dev
 ```
 

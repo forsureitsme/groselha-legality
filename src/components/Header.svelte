@@ -1,5 +1,9 @@
 <svelte:options immutable={true} />
 
+<script>
+	import ForkRibbon from './ForkRibbon.svelte';
+</script>
+
 <header>
 	<h1>Legalidade do formato Groselha</h1>
 	<p>
@@ -17,6 +21,7 @@
 			/>
 		</a>
 	</p>
+	<ForkRibbon />
 </header>
 
 <style>
