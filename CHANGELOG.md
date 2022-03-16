@@ -15,6 +15,16 @@ Todas alterações relevantes para os usuários serão salvas neste arquivo, seg
 
 -->
 
+## [0.3.0]
+
+### Adicionado
+
+- Link para o repositório.
+
+### Alterado
+
+- Atualização na lista de cartas banidas.
+
 ## [0.2.0]
 
 ### Adicionado
