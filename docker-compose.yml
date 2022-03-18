@@ -1,0 +1,14 @@
+version: "2"
+services:
+  node:
+    image: "node:14-alpine"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - "3000:3000"
+    command: sh -c "yarn && yarn vercel link -t ${GL_VERCEL_TOKEN} -p ${GL_VERCEL_PROJECT} --confirm && yarn vercel dev -t ${GL_VERCEL_TOKEN}"
+      

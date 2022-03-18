@@ -9,10 +9,13 @@ https://groselha-legality.vercel.app
 
 ## Desenvolvimento
 
-```
-npx yarn
-vercel pull
-vercel dev
-```
+- Instale o [Docker](https://docs.docker.com/get-docker/)
+- Crie o projeto na [Vercel](https://vercel.com/) a partir do seu repositório.
+- Crie um arquivo `.env` na raiz do projeto ([Exemplo](./.env.example)).
+- Defina sua [chave da Vercel](https://vercel.com/account/tokens) no `.env` em `GL_VERCEL_TOKEN=`
+- Rode o comando `docker-compose up`
+- Acesse http://localhost:3000
 
-## [Alterações](https://github.com/forsureitsme/groselha-legality/blob/main/CHANGELOG.md)
+## Alterações
+
+Veja o [CHANGELOG](https://github.com/forsureitsme/groselha-legality/blob/main/CHANGELOG.md).
