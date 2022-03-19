@@ -11,4 +11,3 @@ services:
     ports:
       - "3000:3000"
     command: sh -c "yarn && yarn vercel link -t ${GL_VERCEL_TOKEN} -p ${GL_VERCEL_PROJECT} --confirm && yarn vercel dev -t ${GL_VERCEL_TOKEN}"
-      
