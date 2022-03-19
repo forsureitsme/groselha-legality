@@ -17,16 +17,16 @@ import Sentry from './_sentry';
 // const db = process.env.GL_DB_QUALIFIED_NAME;
 
 export default async (request: VercelRequest, response: VercelResponse) => {
-	const cardLegalityTransaction = Sentry.startTransaction({
-		op: '[card]',
+	const currentPriceTransaction = Sentry.startTransaction({
+		op: 'current-price',
 		name: 'Get current card price'
 	});
 
 	try {
-		const { card } = request.body;
+		const { card } = request.query;
 		const price = await getCurrentLigaMagicPrice({ card });
 
-		return response.status(200).send(price);
+		return response.status(200).json({ price });
 	} catch (error) {
 		Sentry.captureException(error);
 
@@ -34,7 +34,7 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 			error
 		});
 	} finally {
-		cardLegalityTransaction.finish();
+		currentPriceTransaction.finish();
 	}
 };
 

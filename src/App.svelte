@@ -4,6 +4,17 @@
 	import Header from './components/Header.svelte';
 	import { assertFecth } from './helpers';
 
+	//
+	async function currentPrice(q: string) {
+		const response = await fetch(`/api/current-price?card=${q}`);
+		assertFecth(response);
+
+		const { price } = await response.json();
+
+		return price;
+	}
+	//
+
 	async function scryfallSearch(q: string) {
 		const url = 'https://api.scryfall.com/cards/search?q=' + encodeURIComponent(q);
 
@@ -54,6 +65,12 @@
 <div class="App">
 	<Header />
 	<main>
+		<!-- {#await currentPrice('Estrid%2C+the+Masked')}
+			<p>Carregando...</p>
+		{:then price}
+			{price}
+		{/await} -->
+
 		<AutoComplete
 			valueFieldName="name"
 			labelFieldName="name"

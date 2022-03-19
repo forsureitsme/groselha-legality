@@ -6,8 +6,10 @@ services:
     working_dir: /home/node/app
     environment:
       - NODE_ENV=development
+      - NODE_TLS_REJECT_UNAUTHORIZED='0'
     volumes:
       - ./:/home/node/app
     ports:
       - "3000:3000"
+      - "35729:35729"
     command: sh -c "yarn && yarn vercel link -t ${GL_VERCEL_TOKEN} -p ${GL_VERCEL_PROJECT} --confirm && yarn vercel dev -t ${GL_VERCEL_TOKEN}"
