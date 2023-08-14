@@ -1,4 +1,4 @@
-#⛔️ DEPRECATED
+# ⛔️ DEPRECATED
 
 O formato não existe mais, a Talisman Store não existe mais, e a Liga Magic agora requer login para visualizar o histórico do menor preço.
 
