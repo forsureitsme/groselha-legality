@@ -1,3 +1,7 @@
+#⛔️ DEPRECATED
+
+O formato não existe mais, a Talisman Store não existe mais, e a Liga Magic agora requer login para visualizar o histórico do menor preço.
+
 # Legalidade Groselha
 
 ![Versão](https://img.shields.io/github/package-json/v/forsureitsme/groselha-legality?color=%23FEA0ED&label=Vers%C3%A3o&style=for-the-badge)
